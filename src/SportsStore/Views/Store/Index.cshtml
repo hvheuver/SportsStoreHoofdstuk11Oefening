@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SportsStore.Models.Domain.Product>
+
+@{
+    ViewBag.Title = "The Store";
+}
+
+<h2>The Store</h2>
+
+@foreach (var product in Model)
+{
+    <div class="col-md-6 col-lg-4 col-xs-12">
+        <img src="~/Images/placeholder.gif" class="productimg img-rounded" alt="@product.Name">
+        <h4>@product.Name</h4>
+        <p>@product.Description</p>
+        <h5>@($"{product.Price:N0} €")</h5>
+        <form asp-controller="Cart" asp-action="Add" asp-route-id="@product.ProductId">
+            <div class="form-group">
+                <label class="sr-only" for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" value="1" class="input-medium"/>
+            </div>
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
+            </button>
+        </form>
+        <br/>
+
+    </div>
+}
+
+
+
+
+

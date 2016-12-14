@@ -1,0 +1,73 @@
+﻿@model SportsStore.Models.ViewModels.ProductViewModels.EditViewModel
+
+<h2>@ViewData["Title"]</h2>
+@{
+    ViewData["Title"] = (Model.ProductId == 0) ? "Create Product" : "Edit Product";
+    var action = Model.ProductId == 0 ? "Create" : "Edit";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+
+<form asp-action="@action" method="post">
+    <div asp-validation-summary="All"></div>
+    <input asp-for="ProductId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <div><span asp-validation-for="Description" class="text-danger"></span></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InStock"></label>
+        <input asp-for="InStock" />
+        <span asp-validation-for="InStock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Availability"></label>
+        <select asp-for="Availability" asp-items="@(ViewData["Availabilities"] as SelectList)" class="form-control">
+            <option value="">-- select availability --</option>
+        </select>
+        <span asp-validation-for="Availability" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AvailableTill"></label>
+        <input asp-for="AvailableTill"  class="form-control"/>
+        <span asp-validation-for="AvailableTill" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" asp-items="@(ViewData["Categories"] as SelectList)" class="form-control">
+            <option value="">-- select category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+
+
+
+
+
+
